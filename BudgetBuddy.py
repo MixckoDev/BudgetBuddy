@@ -2,7 +2,6 @@ import json
 
 BUDGET_FILE = "budget_data.json"
 
-# Load data from the budget file or initialize if it doesn't exist
 def load_data():
     try:
         with open(BUDGET_FILE, "r") as file:
@@ -10,19 +9,19 @@ def load_data():
     except FileNotFoundError:
         return {"income": 0, "expenses": [], "budgets": {}}
 
-# Save the data to the budget file
+
 def save_data(data):
     with open(BUDGET_FILE, "w") as file:
         json.dump(data, file, indent=4)
 
-# Add income
+
 def add_income(data):
     income = float(input("Enter your income: "))
     data["income"] = income
     save_data(data)
     print(f"Income of {income} added successfully.")
 
-# Add an expense
+
 def add_expense(data):
     category = input("Enter expense category (e.g., food, rent): ").strip()
     amount = float(input("Enter expense amount: "))
@@ -30,7 +29,7 @@ def add_expense(data):
     save_data(data)
     print(f"Expense of {amount} in {category} added successfully.")
 
-# Set a budget for a category
+
 def set_budget(data):
     category = input("Enter category to set a budget for (e.g., food, rent): ").strip()
     budget_amount = float(input(f"Enter budget for {category}: "))
@@ -38,7 +37,7 @@ def set_budget(data):
     save_data(data)
     print(f"Budget of {budget_amount} set for {category}.")
 
-# View financial summary
+
 def view_summary(data):
     total_expenses = sum(expense["amount"] for expense in data["expenses"])
     print("\n--- Financial Summary ---")
@@ -52,7 +51,7 @@ def view_summary(data):
         remaining = budget - spent
         print(f"{category}: Budgeted: {budget}, Spent: {spent}, Remaining: {remaining}")
 
-# Main program loop
+
 def main():
     data = load_data()
     
